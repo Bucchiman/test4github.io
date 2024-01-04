@@ -3,7 +3,7 @@
 # FileName:     local
 # Author:       8ucchiman
 # CreatedDate:  2023-11-12 20:51:23
-# LastModified: 2023-12-21 23:26:07
+# LastModified: 2023-12-23 11:58:34
 # Reference:    8ucchiman.jp
 # Description:  ---
 #
@@ -66,6 +66,7 @@ function lbuild () {
 
 function lrun () {
     echo "run"
+    npm start
 }
 
 function lclean () {
