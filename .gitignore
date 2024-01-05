@@ -21,3 +21,29 @@
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+
+# See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
+
+# dependencies
+ideas/20thcenturyfoxanimation/node_modules
+ideas/20thcenturyfoxanimation/.pnp
+ideas/20thcenturyfoxanimation/.pnp.js
+
+# testing
+ideas/20thcenturyfoxanimation/coverage
+
+# production
+ideas/20thcenturyfoxanimation/build
+
+# misc
+ideas/20thcenturyfoxanimation/.DS_Store
+ideas/20thcenturyfoxanimation/.env.local
+ideas/20thcenturyfoxanimation/.env.development.local
+ideas/20thcenturyfoxanimation/.env.test.local
+ideas/20thcenturyfoxanimation/.env.production.local
+
+ideas/20thcenturyfoxanimation/npm-debug.log*
+ideas/20thcenturyfoxanimation/yarn-debug.log*
+ideas/20thcenturyfoxanimation/yarn-error.log*
+
+
