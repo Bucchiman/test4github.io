@@ -1,128 +1,75 @@
-import React, { useRef } from 'react';
-import { Canvas, useFrame } from 'react-three-fiber';
-import { Mesh } from 'three';
-//import * as THREE from 'three';
-
-const Cube: React.FC = () => {
-  const cubeRef = useRef<Mesh>();
-
-  useFrame(() => {
-    if (cubeRef.current) {
-      cubeRef.current.rotation.x += 0.01;
-      cubeRef.current.rotation.y += 0.01;
-    }
-  });
-
-  return (
-    <mesh ref={cubeRef as React.MutableRefObject<Mesh>}>
-      <boxGeometry args={[1, 1, 1]} />
-      <meshBasicMaterial color={0x00ff00} />
-    </mesh>
-  );
-};
-
-const WebGLScene: React.FC = () => {
-  return (
-    <Canvas>
-      <ambientLight />
-      <Cube />
-    </Canvas>
-  );
-};
+import React, { useEffect } from 'react';
+import * as THREE from 'three';
+import { FontLoader } from 'three/examples/jsm/loaders/FontLoader.js';
+// import { TextGeometry } from 'three/addons/geometries/TextGeometry.js';
+// import {TextGeometry} from 'three/example/jsm/geometries/TextGeometry.js' ;
+import { TextGeometry } from 'three/examples/jsm/geometries/TextGeometry';
 
 const App: React.FC = () => {
-  return (
-    <div className="body">
-      <div className="bucchiman-column" style={{ width: '100vw', height: '100vh' }}>
-        <WebGLScene />
-      </div>
-      <div className="topic-column" style={{ width: '100vw', height: '100vh' }}>
-        <div>one</div>
-        <div>two</div>
-        <div>three</div>
-      </div>
-    </div>
-  );
+  useEffect(() => {
+    // Set up Three.js scene, camera, and renderer
+    const scene = new THREE.Scene();
+    const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+    const renderer = new THREE.WebGLRenderer();
+    renderer.setSize(window.innerWidth, window.innerHeight);
+    document.body.appendChild(renderer.domElement);
+
+    // Load font using FontLoader
+    const fontLoader = new FontLoader();
+    fontLoader.load('https://threejs.org/examples/fonts/helvetiker_regular.typeface.json', (font) => {
+      // Create 3D text geometry
+      const textGeometry = new TextGeometry('8ucchiman', {
+        font: font,
+        size: 0.5,
+        height: 0.1,
+        curveSegments: 12,
+        bevelEnabled: false,
+      });
+
+      const material = new THREE.MeshBasicMaterial({ color: 0xff0000 });
+      const textMesh = new THREE.Mesh(textGeometry, material);
+      scene.add(textMesh);
+
+      // Position the camera
+      camera.position.z = 5;
+
+      // Animation loop
+      const animate = () => {
+        requestAnimationFrame(animate);
+
+        // Rotate the text
+        textMesh.rotation.x += 0.01;
+        textMesh.rotation.y += 0.01;
+
+        // Render the scene
+        renderer.render(scene, camera);
+      };
+
+      // Resize handling
+      const handleResize = () => {
+        const newWidth = window.innerWidth;
+        const newHeight = window.innerHeight;
+
+        camera.aspect = newWidth / newHeight;
+        camera.updateProjectionMatrix();
+
+        renderer.setSize(newWidth, newHeight);
+      };
+
+      // Event listeners
+      window.addEventListener('resize', handleResize);
+
+      // Start animation loop
+      animate();
+
+      // Cleanup on unmount
+      return () => {
+        window.removeEventListener('resize', handleResize);
+      };
+    });
+  }, []); // Only run once on mount
+
+  return null; // No need to render anything in the React component
 };
 
 export default App;
-
-// Reference: https://webglfundamentals.org/webgl/lessons/webgl-text-glyphs.html
-// interface GlyphInfo {
-//   x: number;
-//   y: number;
-//   width: number;
-// }
-// 
-// interface FontInfo {
-//   letterHeight: number;
-//   spaceWidth: number;
-//   spacing: number;
-//   textureWidth: number;
-//   textureHeight: number;
-//   glyphInfos: Record<string, GlyphInfo>;
-// }
-// 
-// interface VerticesData {
-//   arrays: {
-//     position: Float32Array;
-//     texcoord: Float32Array;
-//   };
-//   numVertices: number;
-// }
-// 
-// const MyComponent: React.FC = () => {
-//   const canvasRef = useRef<HTMLCanvasElement | null>(null);
-// 
-//   useEffect(() => {
-//     const canvas = canvasRef.current;
-//     if (!canvas) return;
-// 
-//     const gl = canvas.getContext('webgl');
-//     if (!gl) return;
-// 
-//     // Rest of the code...
-//     // (Please copy the remaining code from the provided TypeScript code to this point)
-//     const textPositions: number[][] = [];
-// 
-//     const names: string[] = ["8ucchiman"];
-// 
-//     function drawScene(now: number) {
-//       // ... (unchanged code)
-// 
-//       textPositions.forEach(function (pos: number[], ndx: number) {
-//         // ... (unchanged code)
-// 
-//         var name = names[ndx];
-//         var s = name + ":" + pos[0].toFixed(0) + "," + pos[1].toFixed(0) + "," + pos[2].toFixed(0);
-//         var vertices = makeVerticesForString(fontInfo, s);
-// 
-//         // ... (unchanged code)
-// 
-//         // Draw the text.
-//         gl.drawArrays(gl.TRIANGLES, 0, vertices.numVertices);
-//       });
-// 
-//       requestAnimationFrame(drawScene);
-//     }
-// 
-//     drawScene(0); // Initial call to start the animation
-// 
-//     // Cleanup on unmount
-//     return () => cancelAnimationFrame(drawScene);
-//   }, []);
-// 
-//   return <canvas ref={canvasRef} />;
-// };
-// 
-// // export default MyComponent;
-// 
-// const App: React.FC = () => {
-//   return (
-//     <div>
-//       <MyComponent />
-//     </div>
-//   );
-// };
-// 
-// export default App;
