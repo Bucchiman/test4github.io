@@ -1,6 +1,8 @@
 import React, { useEffect } from 'react';
 import * as THREE from 'three';
 import { FontLoader } from 'three/examples/jsm/loaders/FontLoader.js';
+// import { EffectComposer } from '';
+
 // import { TextGeometry } from 'three/addons/geometries/TextGeometry.js';
 // import {TextGeometry} from 'three/example/jsm/geometries/TextGeometry.js' ;
 import { TextGeometry } from 'three/examples/jsm/geometries/TextGeometry';
@@ -14,8 +16,19 @@ const App: React.FC = () => {
     // renderer.setSize(window.innerWidth, window.innerHeight);
     // document.body.appendChild(renderer.domElement);
     renderer.setSize(window.innerWidth / 2, window.innerHeight);
+    renderer.setClearColor(0x090D17); // Set background color here
     const container = document.getElementById('webgl-container');
     container?.appendChild(renderer.domElement);
+
+    // Add ambient light
+    const ambientLight = new THREE.AmbientLight(0xffffff, 0.5);
+    scene.add(ambientLight);
+
+    // Add directional light
+    const directionalLight = new THREE.DirectionalLight(0xffffff, 0.5);
+    directionalLight.position.set(10, 1, 0);
+    scene.add(directionalLight);
+ 
 
 
     // Load font using FontLoader
@@ -30,7 +43,7 @@ const App: React.FC = () => {
         bevelEnabled: false,
       });
 
-      const material = new THREE.MeshBasicMaterial({ color: 0xff0000 });
+      const material = new THREE.MeshPhongMaterial({ color: 0xff0000 });
       const textMesh = new THREE.Mesh(textGeometry, material);
       scene.add(textMesh);
 
@@ -52,7 +65,8 @@ const App: React.FC = () => {
       // Resize handling
       const handleResize = () => {
         const newWidth = window.innerWidth;
-        const newHeight = window.innerHeight;
+        // const newHeight = window.innerHeight;
+        const newHeight = window.innerHeight / 2;
 
         camera.aspect = newWidth / newHeight;
         camera.updateProjectionMatrix();
