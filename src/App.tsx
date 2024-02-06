@@ -11,8 +11,12 @@ const App: React.FC = () => {
     const scene = new THREE.Scene();
     const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
     const renderer = new THREE.WebGLRenderer();
-    renderer.setSize(window.innerWidth, window.innerHeight);
-    document.body.appendChild(renderer.domElement);
+    // renderer.setSize(window.innerWidth, window.innerHeight);
+    // document.body.appendChild(renderer.domElement);
+    renderer.setSize(window.innerWidth / 2, window.innerHeight);
+    const container = document.getElementById('webgl-container');
+    container?.appendChild(renderer.domElement);
+
 
     // Load font using FontLoader
     const fontLoader = new FontLoader();
@@ -69,7 +73,18 @@ const App: React.FC = () => {
     });
   }, []); // Only run once on mount
 
-  return null; // No need to render anything in the React component
+  // return null; // No need to render anything in the React component
+  return (
+    <div style={{ display: 'flex' }}>
+      <div id="webgl-container" style={{ flex: 1 }}></div>
+      <div style={{ flex: 1 }}>
+        {/* Your picture gallery component goes here */}
+        <h1>Picture Gallery</h1>
+        {/* Add your picture gallery component here */}
+      </div>
+    </div>
+  );
+
 };
 
 export default App;
