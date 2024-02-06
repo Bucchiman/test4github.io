@@ -76,8 +76,8 @@ const App: React.FC = () => {
   // return null; // No need to render anything in the React component
   return (
     <div style={{ display: 'flex' }}>
-      <div id="webgl-container" style={{ flex: 1 }}></div>
-      <div style={{ flex: 1 }}>
+      <div className="bucchiman-column" id="webgl-container" style={{ flex: 1 }}></div>
+      <div className="topic-column" style={{ flex: 1 }}>
         {/* Your picture gallery component goes here */}
         <h1>Picture Gallery</h1>
         {/* Add your picture gallery component here */}
