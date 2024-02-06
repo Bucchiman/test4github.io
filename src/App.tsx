@@ -32,17 +32,14 @@ const WebGLScene: React.FC = () => {
 
 const App: React.FC = () => {
   return (
-    //<div style={{ width: '100vw', height: '100vh' }}>
-    //  <WebGLScene />
-    //</div>
-
     <div className="body">
-      <div className="left-column" style={{ width: '100vw', height: '100vh' }}>
+      <div className="bucchiman-column" style={{ width: '100vw', height: '100vh' }}>
         <WebGLScene />
-        <h2>Left Column</h2>
       </div>
-      <div className="right-column" style={{ width: '100vw', height: '100vh' }}>
-        <h2>Right Column</h2>
+      <div className="topic-column" style={{ width: '100vw', height: '100vh' }}>
+        <div>one</div>
+        <div>two</div>
+        <div>three</div>
       </div>
     </div>
   );

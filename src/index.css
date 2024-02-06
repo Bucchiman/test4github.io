@@ -11,16 +11,23 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
-.left-column {
+.bucchiman-column {
     flex: 1;
     background-color: #f0f0f0;
     padding: 20px;
 }
 
-.right-column {
+.topic-column {
     flex: 1;
-    background-color: #343540;
+    background-image: url(static.jpg);
     padding: 20px;
+}
+
+.topic-column:hover {
+    background-image: url(animated.gif);
+    display: grid;
+    grid-template-columns: repeat(8, lfr);
+    gap: 10px;
 }
 
 code {
