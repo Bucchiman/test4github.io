@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useRef } from 'react';
 import * as THREE from 'three';
 import { FontLoader } from 'three/examples/jsm/loaders/FontLoader.js';
 // import { EffectComposer } from '';
@@ -8,6 +8,7 @@ import { FontLoader } from 'three/examples/jsm/loaders/FontLoader.js';
 import { TextGeometry } from 'three/examples/jsm/geometries/TextGeometry';
 
 const App: React.FC = () => {
+    const containerRef = useRef<HTMLDivElement>(null);
   useEffect(() => {
     // Set up Three.js scene, camera, and renderer
     const scene = new THREE.Scene();
@@ -15,9 +16,10 @@ const App: React.FC = () => {
     const renderer = new THREE.WebGLRenderer();
     // renderer.setSize(window.innerWidth, window.innerHeight);
     // document.body.appendChild(renderer.domElement);
-    renderer.setSize(window.innerWidth / 2, window.innerHeight);
+    renderer.setSize(window.innerWidth, window.innerHeight);
     renderer.setClearColor(0x090D17); // Set background color here
-    const container = document.getElementById('webgl-container');
+    // const container = document.getElementById('8uGL-container');
+    const container = containerRef.current;
     container?.appendChild(renderer.domElement);
 
     // Add ambient light
@@ -26,7 +28,7 @@ const App: React.FC = () => {
 
     // Add directional light
     const directionalLight = new THREE.DirectionalLight(0xffffff, 0.5);
-    directionalLight.position.set(10, 1, 0);
+    directionalLight.position.set(0, 1, 0);
     scene.add(directionalLight);
  
 
@@ -37,8 +39,8 @@ const App: React.FC = () => {
       // Create 3D text geometry
       const textGeometry = new TextGeometry('8ucchiman', {
         font: font,
-        size: 0.5,
-        height: 0.1,
+        size: 0.6,
+        height: 0.5,
         curveSegments: 12,
         bevelEnabled: false,
       });
@@ -55,7 +57,7 @@ const App: React.FC = () => {
         requestAnimationFrame(animate);
 
         // Rotate the text
-        textMesh.rotation.x += 0.01;
+        // textMesh.rotation.x += 0.01;
         textMesh.rotation.y += 0.01;
 
         // Render the scene
@@ -66,7 +68,7 @@ const App: React.FC = () => {
       const handleResize = () => {
         const newWidth = window.innerWidth;
         // const newHeight = window.innerHeight;
-        const newHeight = window.innerHeight / 2;
+        const newHeight = window.innerHeight;
 
         camera.aspect = newWidth / newHeight;
         camera.updateProjectionMatrix();
@@ -90,15 +92,14 @@ const App: React.FC = () => {
   // return null; // No need to render anything in the React component
   return (
     <div style={{ display: 'flex', flexDirection: 'column', height: '100vh' }}>
-      <div className="bucchiman-column" id="webgl-container" style={{ flex: 1 }}></div>
-      <div className="topic-column" style={{ flex: 1 }}>
+      <div className="bucchiman-column" ref={containerRef}></div>
+      <div className="topic-column">
         {/* Your picture gallery component goes here */}
         <h1>Picture Gallery</h1>
         {/* Add your picture gallery component here */}
       </div>
     </div>
   );
-
 };
 
 export default App;

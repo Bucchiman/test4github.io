@@ -1,6 +1,7 @@
 body {
   margin: 0;
   padding: 0;
+  background: 161821;
   display: flex;
   height: 100vh;
   /*background-color: #343540;*/
@@ -14,20 +15,17 @@ body {
 .bucchiman-column {
     flex: 1;
     /* background-color: #f0f0f0;*/
-    padding: 20px;
 }
 
 .topic-column {
     flex: 1;
     background-image: url(static.jpg);
-    padding: 20px;
 }
 
 .topic-column:hover {
     background-image: url(animated.gif);
     display: grid;
     grid-template-columns: repeat(8, lfr);
-    gap: 10px;
 }
 
 code {
