@@ -91,7 +91,7 @@ const App: React.FC = () => {
 
   // return null; // No need to render anything in the React component
   return (
-    <div style={{ display: 'flex', flexDirection: 'column', height: '100vh' }}>
+    <div style={{ display: 'flex', flexDirection: 'column' }}>
       <div className="bucchiman-column" ref={containerRef}></div>
       <div className="topic-column">
         {/* Your picture gallery component goes here */}
