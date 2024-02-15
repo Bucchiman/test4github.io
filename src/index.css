@@ -10,17 +10,17 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
-.bucchiman-column {
+.bucchiman {
     flex: 1;
     /* background-color: #f0f0f0;*/
 }
 
-.topic-column {
+.topic {
     flex: 1;
     background-image: url(static.jpg);
 }
 
-.topic-column:hover {
+.topic:hover {
     background-image: url(animated.gif);
     display: grid;
     grid-template-columns: repeat(8, lfr);
