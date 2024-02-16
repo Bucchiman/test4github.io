@@ -1,17 +1,22 @@
 {
   "files": {
-    "main.css": "/test4github.io/static/css/main.7f3b4421.css",
-    "main.js": "/test4github.io/static/js/main.7bb781e4.js",
+    "main.css": "/test4github.io/static/css/main.87fee356.css",
+    "main.js": "/test4github.io/static/js/main.37152d4d.js",
     "static/js/787.8ffb415a.chunk.js": "/test4github.io/static/js/787.8ffb415a.chunk.js",
+    "static/media/samurai_champloo.gif": "/test4github.io/static/media/samurai_champloo.c53ccd023e69aa396f51.gif",
+    "static/media/mugen.gif": "/test4github.io/static/media/mugen.8ee7918c14c09ddaa31d.gif",
     "static/media/animated.gif": "/test4github.io/static/media/animated.c666f919a701d21d9b77.gif",
-    "static/media/static.jpg": "/test4github.io/static/media/static.518aa57542c081380d7e.jpg",
+    "static/media/img_5terre.jpg": "/test4github.io/static/media/img_5terre.e53a70cdd22f0f9be348.jpg",
+    "static/media/img_forest.jpg": "/test4github.io/static/media/img_forest.14fe5b53959e50691d0f.jpg",
+    "static/media/img_mountains.jpg": "/test4github.io/static/media/img_mountains.242e5194dcc2ab13bab0.jpg",
+    "static/media/img_lights.jpg": "/test4github.io/static/media/img_lights.84bc44f4e214775d7954.jpg",
     "index.html": "/test4github.io/index.html",
-    "main.7f3b4421.css.map": "/test4github.io/static/css/main.7f3b4421.css.map",
-    "main.7bb781e4.js.map": "/test4github.io/static/js/main.7bb781e4.js.map",
+    "main.87fee356.css.map": "/test4github.io/static/css/main.87fee356.css.map",
+    "main.37152d4d.js.map": "/test4github.io/static/js/main.37152d4d.js.map",
     "787.8ffb415a.chunk.js.map": "/test4github.io/static/js/787.8ffb415a.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.7f3b4421.css",
-    "static/js/main.7bb781e4.js"
+    "static/css/main.87fee356.css",
+    "static/js/main.37152d4d.js"
   ]
 }
