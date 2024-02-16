@@ -16,16 +16,33 @@ import mountainsGif from './samurai_champloo.gif';
 
 
 
-const GalleryItem: React.FC<{ src: string; alt: string; desc: string; gifSrc: string }> = ({ src, alt, desc, gifSrc }) => {
+const GalleryItem: React.FC<{ src: string; alt: string; desc: string; gifSrc: string; delay: number }> = ({ src, alt, desc, gifSrc, delay }) => {
   const [isHovered, setIsHovered] = useState(false);
+  const [timeoutId, setTimeoutId] = useState<number | null>(null);
+
+    const handleMouseEnter = () => {
+        const id = window.setTimeout(() => {
+            setIsHovered(true);
+            }, delay);
+        setTimeoutId(id);
+        };
+
+    const handleMouseLeave = () => {
+        if (timeoutId) {
+            window.clearTimeout(timeoutId);
+            }
+            setIsHovered(false);
+        };
+
   return (
   <div className="gallery"
-        onMouseEnter={() => setIsHovered(true)}
-        onMouseLeave={() => setIsHovered(false)}
+        onMouseEnter={handleMouseEnter}
+        onMouseLeave={handleMouseLeave}
         >
     <a target="_blank" href={src}>
         {isHovered ? (
-          <video src={gifSrc} width="600" height="400" autoPlay loop muted />
+          // <video src={gifSrc} width="600" height="400" autoPlay loop muted />
+            <img src={gifSrc} alt={alt} width="600" height="400" />
         ) : (
           <img src={src} alt={alt} width="600" height="400" />
         )}
@@ -123,10 +140,10 @@ const App: React.FC = () => {
   return (
     <div>
       <div className="bucchiman" ref={containerRef}></div>
-      <GalleryItem src={terre} alt="Cinque Terre" desc="Add a description of the image here" gifSrc={terreGif} />
-      <GalleryItem src={forest} alt="Forest" desc="Add a description of the image here" gifSrc={forestGif} />
-      <GalleryItem src={lights} alt="Northern Lights" desc="Add a description of the image here" gifSrc={lightsGif} />
-      <GalleryItem src={mountains} alt="Mountains" desc="Add a description of the image here" gifSrc={mountainsGif} />
+      <GalleryItem src={terre} alt="Cinque Terre" desc="Add a description of the image here" gifSrc={terreGif} delay={500} />
+      <GalleryItem src={forest} alt="Forest" desc="Add a description of the image here" gifSrc={forestGif} delay={500} />
+      <GalleryItem src={lights} alt="Northern Lights" desc="Add a description of the image here" gifSrc={lightsGif} delay={500} />
+      <GalleryItem src={mountains} alt="Mountains" desc="Add a description of the image here" gifSrc={mountainsGif} delay={500} />
     </div>
   );
 };

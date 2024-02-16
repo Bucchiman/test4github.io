@@ -1,5 +1,5 @@
 body {
-  background: 161821;
+  background: #161821;
   display: flex;
   height: 100vh;
   background-color: #343540;
@@ -15,28 +15,12 @@ body {
     /* background-color: #f0f0f0;*/
 }
 
-/*.topic {
- *    flex: 1;
- *    background-image: url(static.jpg);
- *}
- *
- *.topic:hover {
- *    background-image: url(animated.gif);
- *    display: grid;
- *    grid-template-columns: repeat(8, lfr);
-}*/
-
 .gallery {
   margin: 5px;
   border: 1px solid #ccc;
   float: left;
   width: 180px;
 }
-
-
-/*.gallery:hover {
-  border: 1px solid #777;
-}*/
 
 .gallery img {
   width: 100%;
