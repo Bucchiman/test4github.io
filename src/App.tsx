@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import * as THREE from 'three';
 import { FontLoader } from 'three/examples/jsm/loaders/FontLoader.js';
 import { TextGeometry } from 'three/examples/jsm/geometries/TextGeometry';
@@ -8,15 +8,33 @@ import forest from './img_forest.jpg';
 import lights from './img_lights.jpg';
 import mountains from './img_mountains.jpg';
 
+import terreGif from './animated.gif';
+import forestGif from './animated.gif';
+import lightsGif from './mugen.gif';
+import mountainsGif from './samurai_champloo.gif';
 
-const GalleryItem: React.FC<{ src: string; alt: string; desc: string }> = ({ src, alt, desc }) => (
-  <div className="gallery">
+
+
+
+const GalleryItem: React.FC<{ src: string; alt: string; desc: string; gifSrc: string }> = ({ src, alt, desc, gifSrc }) => {
+  const [isHovered, setIsHovered] = useState(false);
+  return (
+  <div className="gallery"
+        onMouseEnter={() => setIsHovered(true)}
+        onMouseLeave={() => setIsHovered(false)}
+        >
     <a target="_blank" href={src}>
-      <img src={src} alt={alt} width="600" height="400" />
+        {isHovered ? (
+          <video src={gifSrc} width="600" height="400" autoPlay loop muted />
+        ) : (
+          <img src={src} alt={alt} width="600" height="400" />
+        )}
     </a>
-    <div className="desc">{desc}</div>
+    {isHovered && <div className="desc">{desc}</div>}
   </div>
-);
+  );
+};
+
 
 
 const App: React.FC = () => {
@@ -104,38 +122,11 @@ const App: React.FC = () => {
   // return null; // No need to render anything in the React component
   return (
     <div>
-    <style>
-      {`
-        .gallery {
-          margin: 5px;
-          border: 1px solid #ccc;
-          float: left;
-          width: 180px;
-        }
-
-        .gallery:hover {
-          border: 1px solid #777;
-        }
-
-        .gallery img {
-          width: 100%;
-          height: auto;
-        }
-
-        .desc {
-          padding: 15px;
-          text-align: center;
-        }
-      `}
-    </style>
-
       <div className="bucchiman" ref={containerRef}></div>
-      <div className="topic">
-        <GalleryItem src={terre} alt="Cinque Terre" desc="Add a description of the image here" />
-        <GalleryItem src={forest} alt="Forest" desc="Add a description of the image here" />
-        <GalleryItem src={lights} alt="Northern Lights" desc="Add a description of the image here" />
-        <GalleryItem src={mountains} alt="Mountains" desc="Add a description of the image here" />
-      </div>
+      <GalleryItem src={terre} alt="Cinque Terre" desc="Add a description of the image here" gifSrc={terreGif} />
+      <GalleryItem src={forest} alt="Forest" desc="Add a description of the image here" gifSrc={forestGif} />
+      <GalleryItem src={lights} alt="Northern Lights" desc="Add a description of the image here" gifSrc={lightsGif} />
+      <GalleryItem src={mountains} alt="Mountains" desc="Add a description of the image here" gifSrc={mountainsGif} />
     </div>
   );
 };
