@@ -1,32 +1,70 @@
-.gallery-item {
+// index.css
+body {
+  background: #161821;
+  display: flex;
+  height: 100vh;
+  background-color: #343540;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.bucchiman {
+    flex: 1;
+    /* background-color: #f0f0f0;*/
+}
+
+.gallery-container {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr); /* 4 columns */
+  gap: 0; /* No gap between columns */
+  width: 100%; /* Take up the full width of the parent container */
+}
+
+.gallery {
   position: relative;
+  width: 100%; /* Each gallery item takes up the full width of its column */
+  padding-top: 75%; /* Maintain aspect ratio for a 4:3 image */
   overflow: hidden;
 }
 
-.overlay {
+.gallery img {
   position: absolute;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
-  background-color: rgba(0, 0, 0, 0.5);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  opacity: 0;
-  transition: opacity 0.3s;
-  cursor: pointer;
+  object-fit: cover; /* Maintain aspect ratio and fill the container */
 }
 
-.overlay img {
-  width: 50px;
-  height: 50px;
+.gif {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: none;
+}
+
+.gif.visible {
+  display: block;
+}
+
+.overlay {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  padding: 10px;
+  display: none;
 }
 
 .overlay.visible {
-  opacity: 1;
+  display: block;
 }
-
 
 .description {
   position: absolute;
@@ -34,7 +72,7 @@
   left: 0;
   width: 100%;
   padding: 10px;
-  background-color: rgba(0, 0, 0, 0.5); /* Add the missing closing bracket and specify the alpha value for transparency */
+  background-color: rgba(0, 0, 0, 0.5);
   color: white;
   font-size: 14px;
   text-align: center;
@@ -44,4 +82,33 @@
 
 .description.visible {
   opacity: 1;
+}
+
+.gif {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: none;
+}
+
+.gif.visible {
+  display: block;
+}
+
+.gallery-item img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+.gallery-item .icon {
+  position: absolute;
+  bottom: 10px;
+  left: 10px;
+  width: 30px;
+  height: 30px;
+  cursor: pointer;
 }

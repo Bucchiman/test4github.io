@@ -49,24 +49,21 @@ const GalleryItem: React.FC<GalleryItemProps> = ({ src, alt, desc, gifSrc, delay
   };
 
   return (
-    <div className="gallery-item"
+    <div className="gallery"
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
       style={style} // Apply the style prop
     >
       <a href={src} target="_blank" rel="noopener noreferrer">
-        {isHovered ? (
-          <>
-            <img src={gifSrc} alt={alt} />
-            <div className={`overlay ${isHovered ? 'visible' : ''}`} onClick={handleIconClick}>
-              <img src={iconSrc} alt="GitHub" />
-            </div>
-          </>
-        ) : (
-          <img src={src} alt={alt} />
+        <img src={isHovered ? gifSrc : src} alt={alt} />
+        {isHovered && (
+          <div className="overlay">
+            <img src={iconSrc} alt="GitHub" onClick={handleIconClick} />
+          </div>
         )}
       </a>
       <div className={`description ${isHovered ? 'visible' : ''}`}>{desc}</div>
+      <div className={`overlay ${isHovered ? 'visible' : ''}`}></div>
     </div>
   );
 };
