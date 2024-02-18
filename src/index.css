@@ -15,7 +15,7 @@ body {
     /* background-color: #f0f0f0;*/
 }
 
-.gallery {
+/*.gallery {
   margin: 5px;
   border: 1px solid #ccc;
   float: left;
@@ -30,6 +30,33 @@ body {
 .desc {
   padding: 15px;
   text-align: center;
+}*/
+
+
+.gallery-container {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  /*gap: 20px;*/
+  width: 25%;
+}
+
+.gallery-item {
+  position: relative;
+  overflow: hidden;
+}
+
+.gallery-item img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+.gallery-item .icon {
+  position: absolute;
+  /*top: 10px;
+  right: 10px;
+  width: 30px;
+  height: 30px;*/
 }
 
 

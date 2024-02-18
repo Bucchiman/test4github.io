@@ -13,59 +13,68 @@ import forestGif from './animated.gif';
 import lightsGif from './mugen.gif';
 import mountainsGif from './samurai_champloo.gif';
 
+import githubIcon from './github.svg'; // Import the GitHub icon SVG file
 
+interface GalleryItemProps {
+  src: string;
+  alt: string;
+  desc: string;
+  gifSrc: string;
+  delay: number;
+  iconSrc: string;
+  style?: React.CSSProperties; // Add style prop
+}
 
-
-const GalleryItem: React.FC<{ src: string; alt: string; desc: string; gifSrc: string; delay: number }> = ({ src, alt, desc, gifSrc, delay }) => {
+const GalleryItem: React.FC<GalleryItemProps> = ({ src, alt, desc, gifSrc, delay, iconSrc, style }) => {
   const [isHovered, setIsHovered] = useState(false);
   const [timeoutId, setTimeoutId] = useState<number | null>(null);
 
-    const handleMouseEnter = () => {
-        const id = window.setTimeout(() => {
-            setIsHovered(true);
-            }, delay);
-        setTimeoutId(id);
-        };
+  const handleMouseEnter = () => {
+    const id = window.setTimeout(() => {
+      setIsHovered(true);
+    }, delay);
+    setTimeoutId(id);
+  };
 
-    const handleMouseLeave = () => {
-        if (timeoutId) {
-            window.clearTimeout(timeoutId);
-            }
-            setIsHovered(false);
-        };
+  const handleMouseLeave = () => {
+    if (timeoutId) {
+      window.clearTimeout(timeoutId);
+    }
+    setIsHovered(false);
+  };
 
   return (
-  <div className="gallery"
-        onMouseEnter={handleMouseEnter}
-        onMouseLeave={handleMouseLeave}
-        >
-    <a target="_blank" href={src}>
+    <div className="gallery"
+      onMouseEnter={handleMouseEnter}
+      onMouseLeave={handleMouseLeave}
+      style={style} // Apply the style prop
+    >
+      <a target="_blank" href={src}>
         {isHovered ? (
-          // <video src={gifSrc} width="600" height="400" autoPlay loop muted />
-            <img src={gifSrc} alt={alt} width="600" height="400" />
+          <img src={gifSrc} alt={alt} width="600" height="400" />
         ) : (
-          <img src={src} alt={alt} width="600" height="400" />
-        )}
-    </a>
-    {isHovered && <div className="desc">{desc}</div>}
-  </div>
+            <>
+              <img src={src} alt={alt} width="600" height="400" />
+              <img src={iconSrc} alt="icon" className="icon" />
+            </>
+          )}
+      </a>
+      {isHovered && <div className="desc">{desc}</div>}
+    </div>
   );
 };
 
-
-
 const App: React.FC = () => {
-    const containerRef = useRef<HTMLDivElement>(null);
+  const containerRef = useRef<HTMLDivElement>(null);
+  const [webglWidth, setWebglWidth] = useState(0);
+
   useEffect(() => {
     // Set up Three.js scene, camera, and renderer
     const scene = new THREE.Scene();
     const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
     const renderer = new THREE.WebGLRenderer();
-    // renderer.setSize(window.innerWidth, window.innerHeight);
-    // document.body.appendChild(renderer.domElement);
     renderer.setSize(window.innerWidth, window.innerHeight);
     renderer.setClearColor(0x090D17); // Set background color here
-    // const container = document.getElementById('8uGL-container');
     const container = containerRef.current;
     container?.appendChild(renderer.domElement);
 
@@ -77,8 +86,6 @@ const App: React.FC = () => {
     const directionalLight = new THREE.DirectionalLight(0xffffff, 0.5);
     directionalLight.position.set(0, 1, 0);
     scene.add(directionalLight);
- 
-
 
     // Load font using FontLoader
     const fontLoader = new FontLoader();
@@ -104,7 +111,6 @@ const App: React.FC = () => {
         requestAnimationFrame(animate);
 
         // Rotate the text
-        // textMesh.rotation.x += 0.01;
         textMesh.rotation.y += 0.01;
 
         // Render the scene
@@ -114,13 +120,15 @@ const App: React.FC = () => {
       // Resize handling
       const handleResize = () => {
         const newWidth = window.innerWidth;
-        // const newHeight = window.innerHeight;
         const newHeight = window.innerHeight;
 
         camera.aspect = newWidth / newHeight;
         camera.updateProjectionMatrix();
 
         renderer.setSize(newWidth, newHeight);
+
+        // Set the width of the WebGL content
+        setWebglWidth(newWidth);
       };
 
       // Event listeners
@@ -136,14 +144,15 @@ const App: React.FC = () => {
     });
   }, []); // Only run once on mount
 
-  // return null; // No need to render anything in the React component
   return (
     <div>
       <div className="bucchiman" ref={containerRef}></div>
-      <GalleryItem src={terre} alt="Cinque Terre" desc="Add a description of the image here" gifSrc={terreGif} delay={500} />
-      <GalleryItem src={forest} alt="Forest" desc="Add a description of the image here" gifSrc={forestGif} delay={500} />
-      <GalleryItem src={lights} alt="Northern Lights" desc="Add a description of the image here" gifSrc={lightsGif} delay={500} />
-      <GalleryItem src={mountains} alt="Mountains" desc="Add a description of the image here" gifSrc={mountainsGif} delay={500} />
+      <div className="gallery-container">
+        <GalleryItem src={terre} alt="Cinque Terre" desc="Add a description of the image here" gifSrc={terreGif} delay={500} iconSrc={githubIcon} />
+        <GalleryItem src={forest} alt="Forest" desc="Add a description of the image here" gifSrc={forestGif} delay={500} iconSrc={githubIcon} />
+        <GalleryItem src={lights} alt="Northern Lights" desc="Add a description of the image here" gifSrc={lightsGif} delay={500} iconSrc={githubIcon} />
+        <GalleryItem src={mountains} alt="Mountains" desc="Add a description of the image here" gifSrc={mountainsGif} delay={500} iconSrc={githubIcon} />
+      </div>
     </div>
   );
 };
