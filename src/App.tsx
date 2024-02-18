@@ -22,10 +22,11 @@ interface GalleryItemProps {
   gifSrc: string;
   delay: number;
   iconSrc: string;
+  githubUrl: string;
   style?: React.CSSProperties; // Add style prop
 }
 
-const GalleryItem: React.FC<GalleryItemProps> = ({ src, alt, desc, gifSrc, delay, iconSrc, style }) => {
+const GalleryItem: React.FC<GalleryItemProps> = ({ src, alt, desc, gifSrc, delay, iconSrc, githubUrl, style }) => {
   const [isHovered, setIsHovered] = useState(false);
   const [timeoutId, setTimeoutId] = useState<number | null>(null);
 
@@ -43,23 +44,29 @@ const GalleryItem: React.FC<GalleryItemProps> = ({ src, alt, desc, gifSrc, delay
     setIsHovered(false);
   };
 
+  const handleIconClick = () => {
+    window.open(githubUrl, '_blank'); // Open the specified URL in a new tab
+  };
+
   return (
-    <div className="gallery"
+    <div className="gallery-item"
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
       style={style} // Apply the style prop
     >
-      <a target="_blank" href={src}>
+      <a href={src} target="_blank" rel="noopener noreferrer">
         {isHovered ? (
-          <img src={gifSrc} alt={alt} width="600" height="400" />
+          <>
+            <img src={gifSrc} alt={alt} />
+            <div className={`overlay ${isHovered ? 'visible' : ''}`} onClick={handleIconClick}>
+              <img src={iconSrc} alt="GitHub" />
+            </div>
+          </>
         ) : (
-            <>
-              <img src={src} alt={alt} width="600" height="400" />
-              <img src={iconSrc} alt="icon" className="icon" />
-            </>
-          )}
+          <img src={src} alt={alt} />
+        )}
       </a>
-      {isHovered && <div className="desc">{desc}</div>}
+      <div className={`description ${isHovered ? 'visible' : ''}`}>{desc}</div>
     </div>
   );
 };
@@ -148,10 +155,10 @@ const App: React.FC = () => {
     <div>
       <div className="bucchiman" ref={containerRef}></div>
       <div className="gallery-container">
-        <GalleryItem src={terre} alt="Cinque Terre" desc="Add a description of the image here" gifSrc={terreGif} delay={500} iconSrc={githubIcon} />
-        <GalleryItem src={forest} alt="Forest" desc="Add a description of the image here" gifSrc={forestGif} delay={500} iconSrc={githubIcon} />
-        <GalleryItem src={lights} alt="Northern Lights" desc="Add a description of the image here" gifSrc={lightsGif} delay={500} iconSrc={githubIcon} />
-        <GalleryItem src={mountains} alt="Mountains" desc="Add a description of the image here" gifSrc={mountainsGif} delay={500} iconSrc={githubIcon} />
+        <GalleryItem src={terre} alt="Cinque Terre" desc="Add a description of the image here" gifSrc={terreGif} delay={500} iconSrc={githubIcon} githubUrl="https://github.com/Bucchiman/Jetson_Style_Transfer" />
+        <GalleryItem src={forest} alt="Forest" desc="Add a description of the image here" gifSrc={forestGif} delay={500} iconSrc={githubIcon} githubUrl="https://github.com/Bucchiman/mycyclegan" />
+        <GalleryItem src={lights} alt="Northern Lights" desc="Add a description of the image here" gifSrc={lightsGif} delay={500} iconSrc={githubIcon} githubUrl="https://github.com/Bucchiman/dotfiles" />
+        <GalleryItem src={mountains} alt="Mountains" desc="Add a description of the image here" gifSrc={mountainsGif} delay={500} iconSrc={githubIcon} githubUrl="https://github.com/Bucchiman/IoT" />
       </div>
     </div>
   );
