@@ -1,7 +1,7 @@
 {
   "files": {
-    "main.css": "/test4github.io/static/css/main.0f2f0296.css",
-    "main.js": "/test4github.io/static/js/main.43d1819b.js",
+    "main.css": "/test4github.io/static/css/main.0d0e529f.css",
+    "main.js": "/test4github.io/static/js/main.66461270.js",
     "static/js/787.8ffb415a.chunk.js": "/test4github.io/static/js/787.8ffb415a.chunk.js",
     "static/media/samurai_champloo.gif": "/test4github.io/static/media/samurai_champloo.c53ccd023e69aa396f51.gif",
     "static/media/mugen.gif": "/test4github.io/static/media/mugen.8ee7918c14c09ddaa31d.gif",
@@ -12,12 +12,12 @@
     "static/media/img_lights.jpg": "/test4github.io/static/media/img_lights.84bc44f4e214775d7954.jpg",
     "static/media/github.svg": "/test4github.io/static/media/github.6fa18895f6e6c7772cab7049f7e05f59.svg",
     "index.html": "/test4github.io/index.html",
-    "main.0f2f0296.css.map": "/test4github.io/static/css/main.0f2f0296.css.map",
-    "main.43d1819b.js.map": "/test4github.io/static/js/main.43d1819b.js.map",
+    "main.0d0e529f.css.map": "/test4github.io/static/css/main.0d0e529f.css.map",
+    "main.66461270.js.map": "/test4github.io/static/js/main.66461270.js.map",
     "787.8ffb415a.chunk.js.map": "/test4github.io/static/js/787.8ffb415a.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.0f2f0296.css",
-    "static/js/main.43d1819b.js"
+    "static/css/main.0d0e529f.css",
+    "static/js/main.66461270.js"
   ]
 }
