@@ -23,10 +23,11 @@ interface GalleryItemProps {
   delay: number;
   iconSrc: string;
   githubUrl: string;
-  style?: React.CSSProperties; // Add style prop
+  style?: React.CSSProperties;
+  webglWidth: number;
 }
 
-const GalleryItem: React.FC<GalleryItemProps> = ({ src, alt, desc, gifSrc, delay, iconSrc, githubUrl, style }) => {
+const GalleryItem: React.FC<GalleryItemProps> = ({ src, alt, desc, gifSrc, delay, iconSrc, githubUrl, style, webglWidth }) => {
   const [isHovered, setIsHovered] = useState(false);
   const [timeoutId, setTimeoutId] = useState<number | null>(null);
 
@@ -52,7 +53,7 @@ const GalleryItem: React.FC<GalleryItemProps> = ({ src, alt, desc, gifSrc, delay
     <div className="gallery"
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
-      style={style} // Apply the style prop
+      style={{ ...style, width: `${webglWidth / 4}px` }} // Set width dynamically
     >
       <a href={src} target="_blank" rel="noopener noreferrer">
         <img src={isHovered ? gifSrc : src} alt={alt} />
@@ -152,10 +153,10 @@ const App: React.FC = () => {
     <div>
       <div className="bucchiman" ref={containerRef}></div>
       <div className="gallery-container">
-        <GalleryItem src={terre} alt="Cinque Terre" desc="Add a description of the image here" gifSrc={terreGif} delay={500} iconSrc={githubIcon} githubUrl="https://github.com/Bucchiman/Jetson_Style_Transfer" />
-        <GalleryItem src={forest} alt="Forest" desc="Add a description of the image here" gifSrc={forestGif} delay={500} iconSrc={githubIcon} githubUrl="https://github.com/Bucchiman/mycyclegan" />
-        <GalleryItem src={lights} alt="Northern Lights" desc="Add a description of the image here" gifSrc={lightsGif} delay={500} iconSrc={githubIcon} githubUrl="https://github.com/Bucchiman/dotfiles" />
-        <GalleryItem src={mountains} alt="Mountains" desc="Add a description of the image here" gifSrc={mountainsGif} delay={500} iconSrc={githubIcon} githubUrl="https://github.com/Bucchiman/IoT" />
+        <GalleryItem src={terre} alt="Cinque Terre" desc="Add a description of the image here" gifSrc={terreGif} delay={500} iconSrc={githubIcon} githubUrl="https://github.com/Bucchiman/Jetson_Style_Transfer" webglWidth={webglWidth} />
+        <GalleryItem src={forest} alt="Forest" desc="Add a description of the image here" gifSrc={forestGif} delay={500} iconSrc={githubIcon} githubUrl="https://github.com/Bucchiman/mycyclegan" webglWidth={webglWidth} />
+        <GalleryItem src={lights} alt="Northern Lights" desc="Add a description of the image here" gifSrc={lightsGif} delay={500} iconSrc={githubIcon} githubUrl="https://github.com/Bucchiman/dotfiles" webglWidth={webglWidth} />
+        <GalleryItem src={mountains} alt="Mountains" desc="Add a description of the image here" gifSrc={mountainsGif} delay={500} iconSrc={githubIcon} githubUrl="https://github.com/Bucchiman/IoT" webglWidth={webglWidth} />
       </div>
     </div>
   );
