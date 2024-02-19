@@ -11,21 +11,20 @@ body {
 }
 
 .bucchiman {
-    flex: 1;
-    /* background-color: #f0f0f0;*/
+  flex: 1;
+  /* background-color: #f0f0f0;*/
 }
 
 .gallery-container {
   display: grid;
   grid-template-columns: repeat(4, 1fr); /* 4 columns */
   gap: 0; /* No gap between columns */
-  width: 100%; /* Take up the full width of the parent container */
 }
 
 .gallery {
   position: relative;
-  width: 25%; /* Each gallery item takes up the full width of its column */
-  padding-top: calc(75%/4); /* Maintain aspect ratio for a 4:3 image */
+  width: 100%; /* Each gallery item takes up the full width of its column */
+  padding-top: 75%; /* Maintain aspect ratio for a 4:3 image */
   overflow: hidden;
 }
 

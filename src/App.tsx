@@ -1,3 +1,4 @@
+// App.tsx
 import React, { useEffect, useRef, useState } from 'react';
 import * as THREE from 'three';
 import { FontLoader } from 'three/examples/jsm/loaders/FontLoader.js';
@@ -23,11 +24,10 @@ interface GalleryItemProps {
   delay: number;
   iconSrc: string;
   githubUrl: string;
-  style?: React.CSSProperties;
-  webglWidth: number;
+  style?: React.CSSProperties; // Add style prop
 }
 
-const GalleryItem: React.FC<GalleryItemProps> = ({ src, alt, desc, gifSrc, delay, iconSrc, githubUrl, style, webglWidth }) => {
+const GalleryItem: React.FC<GalleryItemProps> = ({ src, alt, desc, gifSrc, delay, iconSrc, githubUrl, style }) => {
   const [isHovered, setIsHovered] = useState(false);
   const [timeoutId, setTimeoutId] = useState<number | null>(null);
 
@@ -53,7 +53,7 @@ const GalleryItem: React.FC<GalleryItemProps> = ({ src, alt, desc, gifSrc, delay
     <div className="gallery"
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
-      style={{ ...style, width: `${webglWidth / 4}px` }} // Set width dynamically
+      style={style} // Apply the style prop
     >
       <a href={src} target="_blank" rel="noopener noreferrer">
         <img src={isHovered ? gifSrc : src} alt={alt} />
@@ -152,11 +152,11 @@ const App: React.FC = () => {
   return (
     <div>
       <div className="bucchiman" ref={containerRef}></div>
-      <div className="gallery-container">
-        <GalleryItem src={terre} alt="Cinque Terre" desc="Add a description of the image here" gifSrc={terreGif} delay={500} iconSrc={githubIcon} githubUrl="https://github.com/Bucchiman/Jetson_Style_Transfer" webglWidth={webglWidth} />
-        <GalleryItem src={forest} alt="Forest" desc="Add a description of the image here" gifSrc={forestGif} delay={500} iconSrc={githubIcon} githubUrl="https://github.com/Bucchiman/mycyclegan" webglWidth={webglWidth} />
-        <GalleryItem src={lights} alt="Northern Lights" desc="Add a description of the image here" gifSrc={lightsGif} delay={500} iconSrc={githubIcon} githubUrl="https://github.com/Bucchiman/dotfiles" webglWidth={webglWidth} />
-        <GalleryItem src={mountains} alt="Mountains" desc="Add a description of the image here" gifSrc={mountainsGif} delay={500} iconSrc={githubIcon} githubUrl="https://github.com/Bucchiman/IoT" webglWidth={webglWidth} />
+      <div className="gallery-container" style={{ width: `${webglWidth}px` }}>
+        <GalleryItem src={terre} alt="Cinque Terre" desc="Add a description of the image here" gifSrc={terreGif} delay={500} iconSrc={githubIcon} githubUrl="https://github.com/Bucchiman/Jetson_Style_Transfer" style={{ width: `${webglWidth / 4}px` }} />
+        <GalleryItem src={forest} alt="Forest" desc="Add a description of the image here" gifSrc={forestGif} delay={500} iconSrc={githubIcon} githubUrl="https://github.com/Bucchiman/mycyclegan" style={{ width: `${webglWidth / 4}px` }} />
+        <GalleryItem src={lights} alt="Northern Lights" desc="Add a description of the image here" gifSrc={lightsGif} delay={500} iconSrc={githubIcon} githubUrl="https://github.com/Bucchiman/dotfiles" style={{ width: `${webglWidth / 4}px` }} />
+        <GalleryItem src={mountains} alt="Mountains" desc="Add a description of the image here" gifSrc={mountainsGif} delay={500} iconSrc={githubIcon} githubUrl="https://github.com/Bucchiman/IoT" style={{ width: `${webglWidth / 4}px` }} />
       </div>
     </div>
   );
